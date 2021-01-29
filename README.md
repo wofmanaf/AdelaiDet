@@ -10,8 +10,9 @@ To date, AdelaiDet implements the following algorithms:
 * [MEInst](configs/MEInst-InstanceSegmentation/README.md)
 * [ABCNet](configs/BAText/README.md)
 * [CondInst](configs/CondInst/README.md)
-* [SOLO](https://arxiv.org/abs/1912.04488) _to be released_ ([mmdet version](https://github.com/WXinlong/SOLO))
-* [SOLOv2](https://arxiv.org/abs/2003.10152) _to be released_ ([mmdet version](https://github.com/WXinlong/SOLO))
+* [SOLO](https://arxiv.org/abs/1912.04488) ([mmdet version](https://github.com/WXinlong/SOLO))
+* [SOLOv2](configs/SOLOv2/README.md)
+* [BoxInst](https://arxiv.org/abs/2012.02310) _to be released_ ([video demo](https://www.youtube.com/watch?v=NuF8NAYf5L8))
 * [DirectPose](https://arxiv.org/abs/1911.07451) _to be released_
 
 
@@ -20,7 +21,7 @@ To date, AdelaiDet implements the following algorithms:
 ## Models
 ### COCO Object Detecton Baselines with [FCOS](https://arxiv.org/abs/1904.01355)
 Name | inf. time | box AP | download
---- |:---:|:---:|:---:
+--- |:---:|:---:|:---
 [FCOS_R_50_1x](configs/FCOS-Detection/R_50_1x.yaml) | 16 FPS | 38.7 | [model](https://cloudstor.aarnet.edu.au/plus/s/glqFc13cCoEyHYy/download)
 [FCOS_MS_R_101_2x](configs/FCOS-Detection/MS_R_101_2x.yaml) | 12 FPS | 43.1 | [model](https://cloudstor.aarnet.edu.au/plus/s/M3UOT6JcyHy2QW1/download)
 [FCOS_MS_X_101_32x8d_2x](configs/FCOS-Detection/MS_X_101_32x8d_2x.yaml) | 6.6 FPS | 43.9 | [model](https://cloudstor.aarnet.edu.au/plus/s/R7H00WeWKZG45pP/download)
@@ -73,7 +74,9 @@ Note that:
 
 ## Installation
 
-First install Detectron2 following the official guide: [INSTALL.md](https://github.com/facebookresearch/detectron2/blob/master/INSTALL.md). Please use Detectron2 with commit id [9eb4831](https://github.com/facebookresearch/detectron2/commit/9eb4831f742ae6a13b8edb61d07b619392fb6543) for now. The incompatibility with the latest one will be fixed soon.
+First install Detectron2 following the official guide: [INSTALL.md](https://github.com/facebookresearch/detectron2/blob/master/INSTALL.md).
+
+*Please use Detectron2 with commit id [9eb4831](https://github.com/facebookresearch/detectron2/commit/9eb4831f742ae6a13b8edb61d07b619392fb6543) if you have any issues related to Detectron2.*
 
 Then build AdelaiDet with:
 
@@ -81,6 +84,12 @@ Then build AdelaiDet with:
 git clone https://github.com/aim-uofa/AdelaiDet.git
 cd AdelaiDet
 python setup.py build develop
+```
+
+If you are using docker, a pre-built image can be pulled with:
+
+```
+docker pull tianzhi0549/adet:latest
 ```
 
 Some projects may require special setup, please follow their own `README.md` in [configs](configs).
@@ -128,11 +137,25 @@ Note that:
 - We set `OMP_NUM_THREADS=1` by default, which achieves the best speed on our machines, please change it as needed.
 - This quick start is made for FCOS. If you are using other projects, please check the projects' own `README.md` in [configs](configs). 
 
+
+## Acknowledgements
+
+The authors are grateful to
+Nvidia, Huawei Noah's Ark Lab, ByteDance, Adobe who generously donated GPU computing in the past a few years.
+
 ## Citing AdelaiDet
 
-If you use this toolbox in your research or wish to refer to the baseline results, please use the following BibTeX entries.
+If you use this toolbox in your research or wish to refer to the baseline results published here, please use the following BibTeX entries:
 
 ```BibTeX
+
+@misc{tian2019adelaidet,
+  author =       {Tian, Zhi and Chen, Hao and Wang, Xinlong and Liu, Yuliang and Shen, Chunhua},
+  title =        {{AdelaiDet}: A Toolbox for Instance-level Recognition Tasks},
+  howpublished = {\url{https://git.io/adelaidet}},
+  year =         {2019}
+}
+
 @inproceedings{tian2019fcos,
   title     =  {{FCOS}: Fully Convolutional One-Stage Object Detection},
   author    =  {Tian, Zhi and Shen, Chunhua and Chen, Hao and He, Tong},
@@ -155,7 +178,7 @@ If you use this toolbox in your research or wish to refer to the baseline result
 }
 
 @inproceedings{liu2020abcnet,
-  title     =  {{ABCNet}: Real-time Scene Text Spotting with Adaptive Bezier-Curve Network},
+  title     =  {{ABCNet}: Real-time Scene Text Spotting with Adaptive {B}ezier-Curve Network},
   author    =  {Liu, Yuliang and Chen, Hao and Shen, Chunhua and He, Tong and Jin, Lianwen and Wang, Liangwei},
   booktitle =  {Proc. IEEE Conf. Computer Vision and Pattern Recognition (CVPR)},
   year      =  {2020}
@@ -168,10 +191,10 @@ If you use this toolbox in your research or wish to refer to the baseline result
   year      =  {2020}
 }
 
-@article{wang2020solov2,
-  title   =  {{SOLOv2}: Dynamic, Faster and Stronger},
+@inproceedings{wang2020solov2,
+  title   =  {{SOLOv2}: Dynamic and Fast Instance Segmentation},
   author  =  {Wang, Xinlong and Zhang, Rufeng and Kong, Tao and Li, Lei and Shen, Chunhua},
-  journal =  {arXiv preprint arXiv:2003.10152},
+  booktitle =  {Proc. Advances in Neural Information Processing Systems (NeurIPS)},
   year    =  {2020}
 }
 
@@ -192,4 +215,4 @@ If you use this toolbox in your research or wish to refer to the baseline result
 
 ## License
 
-For academic use, this project is licensed under the 2-clause BSD License - see the LICENSE file for details. For commercial use, please contact [Chunhua Shen](https://cs.adelaide.edu.au/~chhshen/).
+For academic use, this project is licensed under the 2-clause BSD License - see the LICENSE file for details. For commercial use, please contact [Chunhua Shen](mailto:chhshen@gmail.com).
